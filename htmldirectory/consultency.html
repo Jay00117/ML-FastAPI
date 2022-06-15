@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="css/sheet.css">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <style>
+        /* From cssbuttons.io by @addy123d */
+        .card {
+            width: 200px;
+            height: 260px;
+            border-radius: 10px;
+            background: #f1f5f3;
+            box-shadow: 1px 5px 60px 0px #4646466b;
+        }
+
+        .card .picture,
+        .card .name,
+        .card .jobtitle,
+        .card .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card .picture {
+            border: 2px solid #4646466b;
+            height: 100px;
+            width: 100px;
+            border-radius: 100%;
+            margin: auto;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .card .picture p {
+            font-size: .8em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .buttons>div {
+            padding: .5em;
+        }
+
+        button {
+            padding: .5em;
+            outline: none;
+            background: transparent;
+            border: 1px solid #0f0f0f6b;
+            border-radius: .4em;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            transition: all .3s;
+            font-size: .7em;
+        }
+
+        .card .picture:hover,
+        button:hover {
+            background: #252525;
+            color: #f1f5f3;
+        }
+
+        .card .name p {
+            margin-top: 8%;
+            margin-bottom: 5%;
+            font-size: 1em;
+        }
+
+        .card .jobtitle p {
+            margin-bottom: 10%;
+            font-size: .54em;
+            text-transform: uppercase;
+            letter-spacing: .5em;
+        }
+
+        /* From cssbuttons.io by @adamgiebl */
+        .cssbuttons-io-button {
+            background: #000000;
+            color: white;
+            font-family: inherit;
+            padding: 0.35em;
+            padding-left: 1.2em;
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: 0.9em;
+            border: none;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            box-shadow: inset 0 0 1.6em -0.6em #000000;
+            overflow: hidden;
+            position: relative;
+            height: 2.8em;
+            padding-right: 3.3em;
+        }
+
+        .cssbuttons-io-button .icon {
+            background: white;
+            margin-left: 1em;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 2.2em;
+            width: 2.2em;
+            border-radius: 0.7em;
+            box-shadow: 0.1em 0.1em 0.6em 0.2em #000000;
+            right: 0.3em;
+            transition: all 0.3s;
+        }
+
+        .cssbuttons-io-button:hover .icon {
+            width: calc(100% - 0.6em);
+        }
+
+        .cssbuttons-io-button .icon svg {
+            width: 1.1em;
+            transition: transform 0.3s;
+            color: #c9ce25;
+        }
+
+        .cssbuttons-io-button:hover .icon svg {
+            transform: translateX(0.1em);
+        }
+
+        .cssbuttons-io-button:active .icon {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg top-fixed" style="background: #22d322; ">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#">iCode</a> -->
+            <img src="icon/icons8-medical-64 (1).png" alt="no img" height="40px">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    style="padding: 0px 0px 0px 20px;">
+                    <li><a href="/" class="nav-link px-2 text-black fw-bold fs-5">Home</a></li>
+                    <!-- <li><a href="#" class="nav-link px-2 text-black">Disease</a></li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold fs-5" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                            Disease
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item " href="diabetes">Diabeties</a></li>
+                            <li><a class="dropdown-item" href="lung_cancer">Lung Cancer</a></li>
+                            <li><a class="dropdown-item" href="kidney">Kidney Disease</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="consultency" class="nav-link px-2 text-black fw-bold fs-5">Consultency</a></li>
+                    <li><a href="about" class="nav-link px-2 text-black fw-bold fs-5">About Us</a></li>
+                    <li><a href="contact" class="nav-link px-2 text-black fw-bold fs-5">Contact Us</a></li>
+                </ul>
+
+                <!-- <div class="mx-4">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#LoginModal">Login</button>
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#">Sign
+                        Up</button>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <img src="icon/ccc2.jpg" alt="" style="width:-webkit-fill-available;">
+
+    <div class="consult" id="consult">
+        <form id="consultencyform" method="post">
+            <div class="row g-4" style="background: #22d322; margin-top: 1cm;
+    padding-bottom: 20px;
+    padding-left: 15px;">
+                <div class="col-sm-2">
+                    <select name="country" class="form-select form-select-lg" aria-label=".form-select-lg example"
+                        id="country" style="border-radius: 20px;">
+                        <option value="">Select country</option>
+                        <option value="United States">United States</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="India">India</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+
+                    <select name="state" class="form-select form-select-lg" aria-label=".form-select-lg example"
+                        id="state" required="" style="border-radius: 20px;">
+                        <option value="">Select state</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Utter Pradesh">Utter Pradesh</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+
+                    <select name="city" class="form-select form-select-lg" aria-label=".form-select-lg example"
+                        id="city" required="" style="border-radius: 20px;">
+                        <option value="">Select city</option>
+                        <option value="Surat">Surat</option>
+                        <option value="Rajkot">Rajkot</option>
+                        <option value="Indore">Mumbai</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-2">
+
+                    <select name="disease" class="form-select form-select-lg" aria-label=".form-select-lg example"
+                        id="disease" required="" name="city" style="border-radius: 20px;">
+                        <option value="">Select Disease</option>
+                        <option value="Diabetes">Diabetes</option>
+                        <option value="Lung Cancer">Lung Cancer</option>
+                        <option value="Kidney Disease">Kidney Disease</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-3" style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="cssbuttons-io-button consultency"> Search
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--cards-->
+    <div class="doctors-card" style="display: flex; justify-content: space-evenly; margin-top: 1cm;">
+        <!-- <div class='card'>
+            <div class='picture'>
+                
+            </div>
+            <div class='name'>
+                <p>Jhon Doe</p>
+            </div>
+            <div class='jobtitle'>
+                <p>Family Physician</p>
+            </div>
+            <div class='buttons'>
+                <div class='button1'>
+                    <button>Button 1</button>
+                </div>
+                <div class='button2'>
+                    <button>Button 2</button>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div class="card">
+            <div class="picture">
+                <p>IMAGE</p>
+            </div>
+            <div class="name">
+                <p>Will Smith</p>
+            </div>
+            <div class="jobtitle">
+                <p>Nephrologist</p>
+            </div>
+            <div class="buttons">
+                <div class="button1">
+                    <button>Button 1</button>
+                </div>
+                <div class="button2">
+                    <button>Button 2</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="picture">
+                <p>IMAGE</p>
+            </div>
+            <div class="name">
+                <p>Layla Mersan</p>
+            </div>
+            <div class="jobtitle">
+                <p>Dermatologist</p>
+            </div>
+            <div class="buttons">
+                <div class="button1">
+                    <button>Button 1</button>
+                </div>
+                <div class="button2">
+                    <button>Button 2</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="picture">
+                <p>IMAGE</p>
+            </div>
+            <div class="name">
+                <p>Dwane Will</p>
+            </div>
+            <div class="jobtitle">
+                <p>Psychiatrist</p>
+            </div>
+            <div class="buttons">
+                <div class="button1">
+                    <button>Button 1</button>
+                </div>
+                <div class="button2">
+                    <button>Button 2</button>
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+    <!--Footer-->
+    <div class="footer-clean" style="margin-top: 2cm;">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
+                            href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+                                class="icon ion-social-snapchat"></i></a><a href="#"><i
+                                class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">JP Care © 2022</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(".consultency").on('click', function (e) {
+            e.preventDefault();
+
+            var consult_form = $('#consultencyform')[0];
+            var consultdata = new FormData(consult_form);
+            console.log(consult_form)
+            console.log(consultdata)
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for( 'consultency_reasult') }}",
+                data: consultdata,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success: function (data) {
+
+                    arr = JSON.parse(data);
+                    console.log(arr);
+                    if (arr.length != 0) {
+                        $.each(arr, function (key, value) {
+                            console.log(value);
+                            $(".doctors-card").append("<div class='card'><div class='picture'><p>IMAGE</p></div><div class='name'><p>" +
+                                value[1] + "</p></div><div class='jobtitle'><p>" + value[2] + " Specialist</p></div><div class='buttons'><div class='button1'><button disabled>" + value[3] + "</button ></div><div class='button2'><button disabled>" + value[6] + "</button></div></div> </div>");
+                        });
+                    }
+                },
+                error: function (e) {
+                    console.log("ERROR : ", e);
+                }
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>

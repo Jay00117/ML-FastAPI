@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Jp care</title>
+    <link rel="stylesheet" href="css/sheet.css">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <style>
+        .symptoms {
+            width: 400px;
+            height: 550px;
+            border-radius: 34px;
+            background: #e0e0e0;
+            box-shadow: 35px 35px 70px #bebebe,
+                -35px 25px 70px #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ayurveda {
+            width: 900px;
+            height: 550px;
+            border-radius: 34px;
+            background: #e0e0e0;
+            box-shadow: 35px 35px 70px #bebebe,
+                -35px 25px 70px #ffffff;
+
+            padding: 10px 10px 10px 10px;
+        }
+
+        .form-group {
+            margin-bottom: 0px;
+        }
+
+        .card-body {
+            padding: 0px 0px 0px 0px;
+        }
+
+        .modal-footer {
+            padding: 0px 0px 0px 0px;
+        }
+
+        /* From cssbuttons.io by @westitan */
+        button {
+            position: relative;
+            padding: 19px 36px;
+            display: block;
+            text-decoration: none;
+
+            overflow: hidden;
+            border-radius: 40px;
+            border: none;
+        }
+
+        button span {
+            position: relative;
+            color: #fff;
+            font-family: Arial;
+            letter-spacing: 8px;
+            z-index: 1;
+        }
+
+        button .liquid {
+            position: absolute;
+            top: -80px;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: #e61628;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, .5);
+            transition: .5s;
+        }
+
+        button .liquid::after,
+        button .liquid::before {
+            content: '';
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            background: #fff;
+        }
+
+        button .liquid::before {
+            border-radius: 45%;
+            background: rgba(20, 20, 20, 1);
+            animation: animate 5s linear infinite;
+        }
+
+        button .liquid::after {
+            border-radius: 40%;
+            background: rgba(20, 20, 20, .5);
+            animation: animate 10s linear infinite;
+        }
+
+        button:hover .liquid {
+            top: -120px;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translate(-50%, -75%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -75%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg top-fixed" style="background: #22d322;">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#">iCode</a> -->
+            <img src="icon/icons8-medical-64 (1).png" alt="no img" height="40px">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    style="padding: 0px 0px 0px 20px;">
+                    <li><a href="/" class="nav-link px-2 text-black fw-bold fs-5">Home</a></li>
+                    <!-- <li><a href="#" class="nav-link px-2 text-black">Disease</a></li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold fs-5" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                            Disease
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item " href="diabetes">Diabeties</a></li>
+                            <li><a class="dropdown-item" href="lung_cancer">Lung Cancer</a></li>
+                            <li><a class="dropdown-item" href="kidney">Kidney Disease</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="consultency" class="nav-link px-2 text-black fw-bold fs-5">Consultency</a></li>
+                    <li><a href="about" class="nav-link px-2 text-black fw-bold fs-5">About Us</a></li>
+                    <li><a href="contact" class="nav-link px-2 text-black fw-bold fs-5">Contact Us</a></li>
+                </ul>
+
+                <!-- <div class="mx-4">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#LoginModal">Login</button>
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#">Sign
+                        Up</button>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <!--disease image-->
+    <img src="icon/k3.jpg" alt="" style="width:-webkit-fill-available;">
+
+
+    <!--About this disease-->
+    <div class="container">
+        <div class="disease-name">
+            <br>
+            <h2>About this disease</h2>
+        </div>
+        <br>
+        <div class="di&d" style="display: flex;">
+            <img src="icon/k1.jpg" alt="" style="height:250px; width:300px; border-radius: 23px;
+            
+            box-shadow:  -17px 17px 34px #aeb5ae,
+             17px -17px 34px #ffffff;">
+            <p style="padding-left: 1cm;">Chronic kidney disease, also called chronic kidney failure, involves a gradual
+                loss of kidney function. Your kidneys filter wastes and excess fluids from your blood, which are then
+                removed in your urine. Advanced chronic kidney disease can cause dangerous levels of fluid, electrolytes
+                and wastes to build up in your body.
+
+                In the early stages of chronic kidney disease, you might have few signs or symptoms. You might not
+                realize that you have kidney disease until the condition is advanced.
+
+                Treatment for chronic kidney disease focuses on slowing the progression of kidney damage, usually by
+                controlling the cause. But, even controlling the cause might not keep kidney damage from progressing.
+                Chronic kidney disease can progress to end-stage kidney failure, which is fatal without artificial
+                filtering (dialysis) or a kidney transplant.
+            </p>
+        </div>
+    </div>
+    <br>
+    <!-- prediction -->
+    <div class="container5" style="margin:1cm 1cm 1cm 1cm;  ">
+        <div>
+            <h1>Wanna predict weather you have CKD or not?</h1>
+        </div>
+        <div style="display: flex; background:rgb(206, 211, 216); border-radius: 20px;">
+            <div class="image" style="width: 350px;">
+                <img src="icon/essay-on-doctors.webp" alt="" width="350px" style="border-radius: 20px;">
+            </div>
+            <div class="disc" style="display: flex; align-items: center;
+            flex-direction: column;
+            justify-content: center; padding-left: 1cm; background:rgb(206, 211, 216) ;">
+                <h2>Predict your CKD here</h2>
+                <p>By filling some simple requirred information you can come to know weather you have CKD or
+                    not.....Just click here</p>
+
+                <!-- Button trigger modal -->
+                <!-- <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#PredictModal">Predict</button> -->
+                <button data-bs-toggle="modal" data-bs-target="#PredictModal">
+                    <span>PREDICT</span>
+                    <div class="liquid"></div>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="PredictModal" tabindex="-1" aria-labelledby="PredictModal"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="PredictModal">Please enter the details regarding the disease
+                                </h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{{ url_for('kidney_check')}}">
+
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Age</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter your age" name="auserage">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Blood
+                                                        Pressure</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter your blood pressure" name="auserbp">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Sugar</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter sugar level" name="ausersu">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">BGR</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter your BGR(blood glucose random)"
+                                                            name="auserbgr">
+                                                    </div>
+                                                </div>
+                                                <br>
+
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Blood
+                                                        urea</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter the rate of blood urea" name="auserbu">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">serum
+                                                        creatine</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter serum careatine rate" name="ausersc">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2"> Hypertension </label>
+                                                    <div class="col-sm-10" style="padding: 0 0 0px 75px" ;>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="auserhtn"
+                                                                id="inlineRadio1" value="1">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="auserhtn"
+                                                                id="inlineRadio2" value="0">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">No</label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2"> Diabetes mellitus</label>
+                                                    <div class="col-sm-10" style="padding: 0 0 0px 75px" ;>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="auserdm"
+                                                                id="inlineRadio1" value="1">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="auserdm"
+                                                                id="inlineRadio2" value="0">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">No</label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2"> Appetite </label>
+                                                    <div class="col-sm-10" style="padding: 0 0 0px 75px" ;>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="auserappet" id="inlineRadio1" value="1">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="auserappet" id="inlineRadio2" value="0">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">No</label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                        </div>
+                                        <!-- <div align="center">
+                                            <button class="btn btn-danger btn-sm" type="submit"> Predict</button>
+                                        </div> -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Predict</button>
+                                        </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <br>
+
+    <!--Stats carsoul-->
+    <div class="container">
+        <h2>Statistics of disease</h2>
+        <br>
+        <div id="carouselExampleCaptions" class=" carousel-dark carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/k4.jpg" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Prevalence of characterstics associated</h1>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/k6.jpg" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">CKD to different age groups</h1>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/k5.jpg" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Risk factors of CKD</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <br>
+
+    <!--symptoms and ayurvedic-->
+    <div class="c" style="display: flex; justify-content: space-around; margin-top: 1cm;">
+        <div class="container1" style="width: 400px; height: 600px;  display: flex;
+        flex-direction: column;
+        align-items: center;">
+            <div>
+                <h2>Lung Cancer Symptoms</h2>
+            </div>
+            <div>
+                <div class="symptoms">
+                    <ul>
+                        <li>Nausea</li>
+                        <li>Vomiting</li>
+                        <li>Loss of appetite</li>
+                        <li>Fatigue and weakness</li>
+                        <li>Sleep problems</li>
+                        <li>Urinating more or less</li>
+                        <li>Decreased mental sharpness</li>
+                        <li>Muscle cramps</li>
+                        <li>Swelling of feet and ankles</li>
+                        <li>Dry, itchy skin</li>
+                        <li>High blood pressure (hypertension) that's difficult to control</li>
+                        <li>Shortness of breath, if fluid builds up in the lungs</li>
+                        <li>Chest pain, if fluid builds up around the lining of the heart</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container1" style="width: 900px; height: 600px;  display: flex;
+        flex-direction: column;
+        align-items: center; ">
+            <div>
+                <h2>Chronic Kidney disease Ayurvedic treatment</h2>
+            </div>
+            <div>
+                <div class="ayurveda">
+
+                    <p>Chronic kidney disease is managed by detecting and managing its primary cause, i.e., treating
+                        diabetes, high blood pressure, kidney stones, etc.</p>
+                    <li>Medications will be prescribed to control potassium levels in the blood and to restore blood
+                        calcium levels</li>
+                    <li>Medications to treat anemia</li>
+                    <li>A low protein diet to minimize waste products in the blood</li>
+                    <li>Medications to lower cholesterol</li>
+                    <br>
+                    <p>Additionally, Ayurveda also recommends a combination of healthy diet (ahar) and lifestyle changes
+                        (vihar) in order to manage the condition effectively. These include:</p>
+                    <h6>DIET RECOMMENDATIONS (AAHAR)</h6>
+                    <p>Purana Shali (Old rice), Kushmanda (White gourd), Patola (pointed gourd), Talaphala (Toddy palm),
+                        Urvaru (Cucumber), Khajura etc. may be useful<strong><em>&nbsp;</em></strong></p>
+                    <ul>
+                        <li>Increase intake of fresh fruits and vegetables</li>
+                        <li>Avoid foods that lead to indigestion</li>
+                        <li>Avoid the following in your diet
+                            <ul>
+                                <li>Meat – especially sea food</li>
+                                <li>Heavy foods</li>
+                                <li>Excess salt</li>
+                                <li>Astringent foods</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <BR></BR>
+
+    <!-- News Section -->
+    <div class="container" style="display: flex;  margin-top: 30px;">
+        <div>
+            <div class="news">
+                {% for key, segment in latest_news.items() %}
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?medical" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b>{{key}}</b>
+                        <p>{{segment}}</p>
+                    </div>
+                </section>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="side-text">
+            <h1 style="text-align: center;">Refer some news here</h1>
+        </div>
+    </div>
+
+    <br>
+    <!-- Treatment Section -->
+    <div class="container" style="display: flex;  margin-top: 30px;">
+        <div class="side-text">
+            <h1 style="text-align: center;">Refer some treatment news here</h1>
+        </div>
+
+        <div>
+            <div class="news">
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?treatment" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b> New Instrument Developed for Assessing Patient Knowledge of CKD </b>
+                        <p>KART 2.0 can differentiate patients who have spent less than a versus 1 or more hours
+                            speaking to health professionals, reading about transplantation</p>
+                    </div>
+                </section>
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?treatment" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b> Kidney Stone Type Shown to Differ by CKD Stage </b>
+                        <p> Kidney stone risk factors and composition vary according to renal function in patients with
+                            chronic kidney disease. </p>
+                    </div>
+                </section>
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?treatment" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b> Acute Myocardial Infarction Risk in CKD Increases With Symptoms </b>
+                        <p> Patient-reported symptoms may be an early warning sign of a future acute myocardial
+                            infarction. </p>
+                    </div>
+                </section>
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?treatment" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b> Elobixibat Improves Constipation in Chronic Kidney Disease </b>
+                        <p>Improvement also seen in lipid metabolism, with increase in LDL cholesterol and decrease in
+                            HDL cholesterol</p>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+
+    <!--Footer-->
+    <div class="footer-clean" style="margin-top: 2cm;">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
+                            href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+                                class="icon ion-social-snapchat"></i></a><a href="#"><i
+                                class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">JP Care © 2022</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+</body>

@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Jp care</title>
+    <link rel="stylesheet" href="css/sheet.css">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <style>
+        .symptoms {
+            width: 400px;
+            height: 550px;
+            border-radius: 34px;
+            background: #e0e0e0;
+            box-shadow: 35px 35px 70px #bebebe,
+                -35px 25px 70px #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ayurveda {
+            width: 900px;
+            height: 550px;
+            border-radius: 34px;
+            background: #e0e0e0;
+            box-shadow: 35px 35px 70px #bebebe,
+                -35px 25px 70px #ffffff;
+
+            padding: 10px 10px 10px 10px;
+        }
+
+        .form-group {
+            margin-bottom: 0px;
+        }
+
+        .card-body {
+            padding: 0px 0px 0px 0px;
+        }
+
+        .modal-footer {
+            padding: 0px 0px 0px 0px;
+        }
+
+        /* From cssbuttons.io by @westitan */
+        button {
+            position: relative;
+            padding: 19px 36px;
+            display: block;
+            text-decoration: none;
+
+            overflow: hidden;
+            border-radius: 40px;
+            border: none;
+        }
+
+        button span {
+            position: relative;
+            color: #fff;
+            font-family: Arial;
+            letter-spacing: 8px;
+            z-index: 1;
+        }
+
+        button .liquid {
+            position: absolute;
+            top: -80px;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: #e61628;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, .5);
+            transition: .5s;
+        }
+
+        button .liquid::after,
+        button .liquid::before {
+            content: '';
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            background: #fff;
+        }
+
+        button .liquid::before {
+            border-radius: 45%;
+            background: rgba(20, 20, 20, 1);
+            animation: animate 5s linear infinite;
+        }
+
+        button .liquid::after {
+            border-radius: 40%;
+            background: rgba(20, 20, 20, .5);
+            animation: animate 10s linear infinite;
+        }
+
+        button:hover .liquid {
+            top: -120px;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translate(-50%, -75%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -75%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg top-fixed" style="background: #22d322;">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#">iCode</a> -->
+            <img src="icon/icons8-medical-64 (1).png" alt="no img" height="40px">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    style="padding: 0px 0px 0px 20px;">
+                    <li><a href="/" class="nav-link px-2 text-black fw-bold fs-5">Home</a></li>
+                    <!-- <li><a href="#" class="nav-link px-2 text-black">Disease</a></li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold fs-5" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                            Disease
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item " href="diabetes">Diabeties</a></li>
+                            <li><a class="dropdown-item" href="lung_cancer">Lung Cancer</a></li>
+                            <li><a class="dropdown-item" href="kidney">Kidney Disease</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="consultency" class="nav-link px-2 text-black fw-bold fs-5">Consultency</a></li>
+                    <li><a href="about" class="nav-link px-2 text-black fw-bold fs-5">About Us</a></li>
+                    <li><a href="contact" class="nav-link px-2 text-black fw-bold fs-5">Contact Us</a></li>
+                </ul>
+
+                <!-- <div class="mx-4">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#LoginModal">Login</button>
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#">Sign
+                        Up</button>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <!--disease image-->
+    <img src="icon/diabetes.jpg" alt="" style="width:-webkit-fill-available;">
+
+
+    <!--About this disease-->
+    <div class="container">
+        <div class="disease-name">
+            <br>
+            <h2>About this disease</h2>
+        </div>
+        <br>
+        <div class="di&d" style="display: flex;">
+            <img src="icon/causes-of-diabetes.webp" alt="" style="height:250px; width:300px; border-radius: 23px;
+            
+            box-shadow:  -17px 17px 34px #aeb5ae,
+             17px -17px 34px #ffffff;">
+            <p style="padding-left: 1cm;">Diabetes Mellitus is the condition in which the blood sugar (glucose) levels
+                are high. The food that we eat is converted into glucose and is used as a source of energy. This is done
+                by Insulin, the hormone released from pancreas. Insulin maintains the blood glucose levels; otherwise an
+                increase (Hyperglycaemia) or decrease (Hypoglycaemia) in those levels might cause health issues to the
+                individual. Due to certain metabolic disorders, the body does not produce adequate amount of insulin
+                (Type 1 Diabetes) or the body does not respond to the insulin and becomes resistant to it (Type 2
+                Diabetes). The symptoms of Diabetes include frequent urination, weight loss/gain, excessive thirst,
+                excessive hunger, blurred vision, fatigue, unhealed wounds, etc. Diabetes may also affect pregnant women
+                (Gestational diabetes).
+            </p>
+        </div>
+    </div>
+    <br>
+    <!-- prediction -->
+    <div class="container5" style="margin:1cm 1cm 1cm 1cm;  ">
+        <div>
+            <h1>Wanna predict weather you have Diabeties or not?</h1>
+        </div>
+        <div style="display: flex; background:rgb(206, 211, 216); border-radius: 20px;">
+            <div class="image" style="width: 350px;">
+                <img src="icon/essay-on-doctors.webp" alt="" width="350px" style="border-radius: 20px;">
+            </div>
+            <div class="disc" style="display: flex; align-items: center;
+            flex-direction: column;
+            justify-content: center; padding-left: 1cm; background:rgb(206, 211, 216) ;">
+                <h2>Predict your Diabetes here</h2>
+                <p>By filling some simple requirred information you can come to know weather you have Diabetes or
+                    not.....Just click here</p>
+
+                <!-- Button trigger modal -->
+                <!-- <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#PredictModal">Predict</button> -->
+                <button data-bs-toggle="modal" data-bs-target="#PredictModal">
+                    <span>PREDICT</span>
+                    <div class="liquid"></div>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="PredictModal" tabindex="-1" aria-labelledby="PredictModal"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="PredictModal">Please enter the details regarding the disease
+                                </h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{{ url_for('diabeteCheck')}}">
+
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-group row" style="margin-bottom: 0px">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Pregnancies</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter the no. of pregnancies"
+                                                            name="userpregnancies" required="">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Glucose</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter the glucose level" name="userglucose">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-4 col-form-label text-sm-right">Blood
+                                                        Pressure</label>
+                                                    <div class="col-12 col-sm-8 col-lg-6">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter your bp level" name="userbp">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-4 col-form-label text-sm-right">Skin
+                                                        Thickness</label>
+                                                    <div class="col-12 col-sm-8 col-lg-6">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter the skin thickness" name="userskin">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Insulin</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter the insulin" name="userinsulin">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">BMI</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter your BMI(Body Mass Index)"
+                                                            name="userbmi">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Diabetes
+                                                        Pedigree Function</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter pedigree function" name="userdpf">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Age</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter your age" name="userage">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                        </div>
+                                        <!-- <div align="center">
+                                            <button class="btn btn-danger btn-sm" type="submit"> Predict</button>
+                                        </div> -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Predict</button>
+                                        </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <br>
+
+    <!--Stats carsoul-->
+    <div class="container">
+        <h2>Statistics of disease</h2>
+        <br>
+        <div id="carouselExampleCaptions" class=" carousel-dark carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/dall.jpg" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Diabeties all over India</h1>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/da.jpg" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Diabeties at different age groups</h1>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/Risk_factors_Diabetes.png" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Risk factors of Diabeties</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <br>
+
+    <!--symptoms and ayurvedic-->
+    <div class="c" style="display: flex; justify-content: space-around; margin-top: 1cm;">
+        <div class="container1" style="width: 400px; height: 600px;  display: flex;
+        flex-direction: column;
+        align-items: center;">
+            <div>
+                <h2>Diabetes Symptoms</h2>
+            </div>
+            <div>
+                <div class="symptoms">
+                    <ul>
+                        <li>Urinate a lot, often at night</li>
+                        <li>Are very thirsty</li>
+                        <li>Lose weight without trying</li>
+                        <li>Are very hungry</li>
+                        <li>Have blurry vision</li>
+                        <li>Have numb or tingling hands or feet</li>
+                        <li>Feel very tired</li>
+                        <li>Have very dry skin</li>
+                        <li>Have sores that heal slowly</li>
+                        <li>Have more infections than usual</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container1" style="width: 900px; height: 600px;  display: flex;
+        flex-direction: column;
+        align-items: center; ">
+            <div>
+                <h2>Ayurveda For Diabetes: Herbal Remedies</h2>
+            </div>
+            <div>
+                <div class="ayurveda">
+
+                    <p>Ayurveda specifies also the use of some herbs that may aid in diabetes treatment. Different
+                        scholars were drawn to herbal preparations for treatment of metabolic syndrome. Below are a
+                        few ayurvedic herbs used to alleviate symptoms of diabetes.</p>
+                    <p style="font-size: small;"> <b>Turmeric:</b>Turmeric powder is an anti-allergic, anti-cancer,
+                        anti-inflammatory, and one of the
+                        strongest natural anti-diabetic agents. It aids in the purification of the blood, acts as a
+                        channel opener, aids in the reduction of insulin resistance, and thus facilitates glucose entry
+                        into the cells. Turmeric is effective when combined with aloe vera.</p>
+                    <p style="font-size: small;"> <b>Saptrangi:</b> This is an excellent diabetes treatment. It is a
+                        tree whose
+                        bark is efficient at regulating blood sugar levels. It is widely studied in western herbal
+                        universities, but has been used in Ayurveda for centuries. The herb has been shown to have
+                        anti-diabetic effects.</p>
+                    <p style="font-size: small;"> <b>Tulsi:</b> The people of India revere this plant for its
+                        extraordinary
+                        medicinal properties. Regular use of tulsi leaves successfully regulates blood sugar levels.
+                        Additionally, it is beneficial for a variety of cancers, respiratory and bacterial infections,
+                        sore throats, coughs, and colds.</p>
+                    <p style="font-size: small;"> <b>Neem:</b> In Ayurveda, neem has historically been used to purify
+                        the blood
+                        and boost the immune system. It aids in the maintenance of normal blood glucose levels.</p>
+                    <p style="font-size: small;"> <b>Amla:</b> Amla is the richest source of vitamin C on the planet and
+                        is
+                        nature’s superantioxidant. Amla contains 30 times the amount of vitamin C found in an orange. It
+                        slows the aging process and thereby delays the onset of diabetes complications.</p>
+                    <p style="font-size: small;"> <b>Karela:</b> This vegetable’s juice works wonders in reducing and
+                        managing
+                        complications of diabetes. For better performance, 30 ml of Karela juice first thing in the
+                        morning on an empty stomach is recommended. It works best when combined with Amla juice.</p>
+                    <p style="font-size: small;"> <b>Guggulu:</b> Guggulu has been used in Ayurveda for centuries to
+                        gently
+                        detoxify the body and promote appropriate nutrients by enhancing the body’s metabolism and
+                        aiding in the elimination of waste products. Through its scraping behavior, it aids in the
+                        removal of excess sugar and fat from the body.</p>
+                    <p style="font-size: small;"> <b>Fenugreek:</b> A spicy, pungent herb that aids in the reduction of
+                        excess
+                        kapha. Fenugreek is an outstanding herb for controlling blood sugar and cholesterol levels.
+                        Fenugreek seed powder is used to help control blood sugar levels.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <BR></BR>
+
+    <!-- News Section -->
+    <div class="container" style="display: flex;  margin-top: 30px;">
+        <div>
+            <div class="news">
+                {% for key, segment in latest_news.items() %}
+                <section class="section section-1">
+
+                    <img class="news-image" src="https://source.unsplash.com/230x230/?medical" alt="">
+                    <div class="news-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b>{{key}}</b>
+                        <p>{{segment}}</p>
+
+                    </div>
+                </section>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="side-text">
+            <h1 style="text-align: center;">Refer some news here</h1>
+        </div>
+    </div>
+
+    <br>
+    <!-- Treatment Section -->
+    <div class="container" style="display: flex;  margin-top: 30px;">
+        <div class="side-text">
+            <h1 style="text-align: center;">Refer some treatment news here</h1>
+        </div>
+
+        <div>
+            <div class="news">
+                {% for key, segment in treat_news.items() %}
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?treatment" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b>{{key}}</b>
+                        <p>{{segment}}</p>
+                    </div>
+                </section>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+
+    <!--Footer-->
+    <div class=" footer-clean" style="margin-top: 2cm;">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
+                            href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+                                class="icon ion-social-snapchat"></i></a><a href="#"><i
+                                class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">JP Care © 2022</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+</body>

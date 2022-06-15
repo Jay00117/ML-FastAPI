@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Jp care</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('icon', path='/') }}" rel="stylesheet">
+    <style>
+        form {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .form-label {
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-control {
+            border-radius: 20px;
+        }
+
+        .form-select {
+            border-radius: 20px;
+        }
+
+        .btn {
+            border-radius: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class=" navbar navbar-expand-lg" style="background: #22d322;">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#">iCode</a> -->
+            <img src="icon/icons8-medical-64 (1).png" alt="no img" height="40px">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    style="padding: 0px 0px 0px 20px;">
+                    <li><a href="/" class="nav-link px-2 text-black fw-bold fs-5">Home</a></li>
+                    <!-- <li><a href="#" class="nav-link px-2 text-black">Disease</a></li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold fs-5" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                            Disease
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item " href="diabetes">Diabeties</a></li>
+                            <li><a class="dropdown-item" href="lung_cancer">Lung Cancer</a></li>
+                            <li><a class="dropdown-item" href="kidney">Kidney Disease</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="consultency" class="nav-link px-2 text-black fw-bold fs-5">Consultency</a></li>
+                    <li><a href="about" class="nav-link px-2 text-black fw-bold fs-5">About Us</a></li>
+                    <li><a href="contact" class="nav-link px-2 text-black fw-bold fs-5">Contact Us</a></li>
+                </ul>
+
+                <div class="mx-4">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#LoginModal"
+                        id="loginBtn">Login</button>
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#SignupModal"
+                        id="signupBtn">Sign Up</button>
+                    <button class="btn btn-primary" id="usrBtn" disabled></button>
+
+                    <button class="btn btn-dark" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: rgb(161, 236, 161);">
+                <div class="modal-header" style="display: flex; justify-content: center">
+                    <h5 class="modal-title" id="LoginModal">Login to JP Care</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form style="flex-direction: column" id="loginform" method="post" ">
+                        <div class=" mb-2">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name="emailadd" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+
+                </div>
+                <div style="display: flex;
+                        justify-content: center;">
+                    <h3>OR</h3>
+                </div>
+                <!-- <div class="mb-2">
+                    <label for="phone" name="phone" class="form-label">Mobile
+                        number</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" value="">
+                    <div class="invalid-feedback">
+                        phone no. required.
+                    </div>
+                </div> -->
+
+                </form>
+            </div>
+            <div class="modal-footer" style=" display: flex; justify-content: center;">
+
+                <button type="button" class="btn btn-dark login">Login</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <!-- Signup Modal action="{{ url_for('fill_form')}}"-->
+    <div class="modal fade" id="SignupModal" tabindex="-1" aria-labelledby="SignupModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: rgb(161, 236, 161);">
+                <div class="modal-header"
+                    style="flex-direction: column; border-bottom: 0px solid #dee2e6; align-items: center; ">
+                    <img src="icon/icons8-medical-64 (1).png" alt="">
+                    <h4 class="modal-title">Welcome to JP Care</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3 needs-validation" id="registerform" method="post">
+                        <div class="col-sm-5">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" name="firstname" class="form-control" id="firstName" placeholder=""
+                                value="" required="">
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" name="lastname" class="form-control" id="lastName" placeholder=""
+                                value="" required="">
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+
+
+                        <div class="col-8">
+                            <label for="email" class="form-label">Email </label>
+                            <input type="email" name="emailadd" class="form-control" id="email"
+                                placeholder="you@example.com">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <div class="col-11">
+                            <label for="address" class="form-label">Address<span
+                                    class="text-muted">(Optional)</span></label>
+                            <input type="text" name="streetadd" class="form-control" id="address"
+                                placeholder="1234 Main St">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="country" class="form-label">Country</label>
+                            <select name="country" class="form-select" id="country" required="">
+                                <option value="">Choose...</option>
+                                <option value="United States">United States</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Mexico">Mexico</option>
+                                <option value="India">India</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="phone" name="phone" class="form-label">Mobile
+                                number</label>
+                            <input type="tel" name="phone" id="phone" class="form-control" value="" required="">
+                            <!--pattern="+91[0-9]{10}" -->
+                            <div class="invalid-feedback">
+                                phone no. required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="state" class="form-label">State</label>
+
+                            <select name="state" class="form-select" id="state" required="">
+                                <option value="">Choose...</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Utter Pradesh">Utter Pradesh</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="state" class="form-label">City</label>
+
+                            <select name="city" class="form-select" id="city" required="">
+                                <option value="">Choose...</option>
+                                <option value="Surat">Surat</option>
+                                <option value="Rajkot">Rajkot</option>
+                                <option value="Indore">Mumbai</option>
+                                <option value="Ahmedabad">Ahmedabad</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="zip" class="form-label">Zip</label>
+                            <input type="text" name="zip" class="form-control" id="zip" placeholder="" required=""
+                                maxlength="6" size="6">
+                            <div class="invalid-feedback">
+                                Zip code required.
+                            </div>
+                        </div>
+
+                        <div class="" style="display: flex;
+                        justify-content: center;">
+                            <button type="submit" class="btn btn-dark register">Register</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="carouselExampleCaptions" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="icon/home-doctors-1024x519-1400x500.png" class="d-block w-100" alt="..."
+                    style="width:1400px; height:500px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Welcome to JP Care</h3>
+                    <p>Hello...you can refer some of the folowing tags for some information</p>
+                    <button class="btn btn-primary" style=" border-radius: 20px;">Technology</button>
+                    <button class="btn btn-danger" style=" border-radius: 20px;">Health care</button>
+                    <button class="btn btn-warning" style=" border-radius: 20px;">Treatments</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="icon/essay-on-doctors.webp" class="d-block w-100" alt="..."
+                    style="width:1400px; height:500px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Welcome to JP Care</h3>
+                    <p>Hello...you can refer some of the folowing tags for some information</p>
+                    <button class="btn btn-primary" style=" border-radius: 20px;">Technology</button>
+                    <button class="btn btn-danger" style=" border-radius: 20px;">Health care</button>
+                    <button class="btn btn-warning" style=" border-radius: 20px;">Treatments</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="icon/m.jpg" class="d-block w-100" alt="..." style="width:1400px; height:500px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Welcome to JP Care</h3>
+                    <p>Hello...you can refer some of the folowing tags for some information</p>
+                    <button class="btn btn-primary" style=" border-radius: 20px;">Technology</button>
+                    <button class="btn btn-danger" style=" border-radius: 20px;">Health care</button>
+                    <button class="btn btn-warning" style=" border-radius: 20px;">Treatments</button>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <br>
+    <div class="container marketing" style="margin-top: 30px;">
+        <!-- Three columns of text below the carousel -->
+        <div class="container" style="display: flex;
+        flex-direction: column;
+        align-items: center;">
+            <div class="container_img">
+                <img src="icon\icons8-medical-64 (1).png" alt="" style="width:140px; height:140px;">
+            </div>
+            <div class="container_text" style="margin-top:1cm;">
+                <p style="font-family: unset;
+                text-transform: uppercase;
+                text-align: center;">Our primary objective is to improve human health by anticipating illness
+                    incidence based on present
+                    health. Furthermore, we provide doctor consultations and some safeguards, such as home remedies and
+                    Ayurveda. Furthermore, we make every effort to keep individuals up to speed on the newest news,
+                    therapeutic advances, and research activities in the medical sector.</p>
+            </div>
+
+        </div>
+
+        <br>
+        <!-- News Section -->
+        <div style="display: flex;  margin-top: 30px;">
+            <div>
+                <div class="news" style="box-shadow:  14px 14px 28px #aeb5ae,
+                -14px -14px 28px #ffffff;">
+                    {% for key, segment in latest_news.items() %}
+                    <section class="section section-1">
+                        <img class="news-image" src="https://source.unsplash.com/230x230/?medical" alt="">
+                        <div class="news-text" style="display: flex; justify-content: center; flex-direction: column;">
+                            <b>{{key}}</b>
+                            <p>{{segment}}</p>
+                        </div>
+                    </section>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="side-text">
+                <h1 style="text-align: center;">Refer some news here</h1>
+            </div>
+        </div>
+
+        <br>
+        <!-- Treatment Section -->
+        <div style="display: flex;  margin-top: 30px;">
+            <div class="side-text">
+                <h1 style="text-align: center;">Refer some treatment news here</h1>
+            </div>
+
+            <div>
+                <div class="news" style="box-shadow:  14px 14px 28px #aeb5ae,
+                -14px -14px 28px #ffffff;">
+                    {% for key, segment in treat_news.items() %}
+                    <section class="section section-1">
+                        <img class="treatment-image" src="https://source.unsplash.com/230x230/?doctors" alt="">
+                        <div class="treatment-text"
+                            style="display: flex; justify-content: center; flex-direction: column;">
+                            <b>{{key}}</b>
+                            <p>{{segment}}</p>
+                        </div>
+                    </section>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <!-- yt Section -->
+        <div class="yt" style="margin-top: 1cm;">
+            <div>
+                <h2>
+                    Refer some You-tube videos here
+                </h2>
+            </div>
+            <div class="yt-list">
+                <div class="yt-card">
+                    <div class="yt-img">
+                        <img class="ytt-image"
+                            src="https://img.medscapestatic.com/thumbnail_library/itp_s5_mtv_program_800x450.jpg"
+                            alt="">
+                    </div>
+                    <div class="yt-discription" style="height: 145px; overflow: hidden; font: -webkit-small-control;">
+                        <h5>Immune Thrombocytopenia: Protecting Endangered Platelets</h5>
+                        <p>University of Southern California physicians discuss challenges in diagnosis and
+                            individualized management of immune thrombocytopenia (ITP) and report on COVID vaccine
+                            precautions for these patients.</p>
+
+                    </div>
+                    <div class="yt-links">
+                        <a class="yt-links" href="https://youtu.be/JF4ERKr_CnI">Click here to watch video</a>
+                    </div>
+                </div>
+                <div class="yt-card">
+                    <div class="yt-img">
+                        <img class="ytt-image"
+                            src="https://img.medscapestatic.com/thumbnail_library/ckd_mtv_program_800x450.jpg" alt="">
+                    </div>
+                    <div class="yt-discription" style="height: 145px; overflow: hidden; font: -webkit-small-control;">
+                        <h5>Diabetes & Kidney Disease: A Heart in Jeopardy</h5>
+                        <p>Top kidney and heart specialists from Indiana University School of Medicine explain how
+                            slowing the progression of chronic kidney disease can protect the heart.</p>
+
+                    </div>
+                    <div class="yt-links">
+                        <a class="yt-links" href="https://youtu.be/q0MeJhCSBB0">Click here to watch video</a>
+                    </div>
+                </div>
+                <div class="yt-card">
+                    <div class="yt-img">
+                        <img class="ytt-image"
+                            src="https://img.medscapestatic.com/thumbnail_library/nhl_s3_mtv_ep_1_800x450.jpg" alt="">
+                    </div>
+                    <div class="yt-discription" style="height: 145px; overflow: hidden; font: -webkit-small-control;">
+                        <h5>An Unwelcome Return: Relapsed/Refractory Non-Hodgkin Lymphomas</h5>
+                        <p>Mayo Clinic oncologists discuss the importance of an accurate NHL diagnosis to inform
+                            therapy, which includes adding novel targeted agents to standard of care.</p>
+
+                    </div>
+                    <div class="yt-links">
+                        <a class="yt-links" href="https://youtu.be/_QVO75CihYQ">Click here to watch video</a>
+                    </div>
+                </div>
+                <div class="yt-card">
+                    <div class="yt-img">
+                        <img class="ytt-image"
+                            src="https://img.medscapestatic.com/thumbnail_library/eds_mtv_program_800x450_v2.jpg"
+                            alt="">
+                    </div>
+                    <div class="yt-discription" style="height: 145px; overflow: hidden; font: -webkit-small-control;">
+                        <h5>Sleepless Nation: A Public Health Epidemic</h5>
+                        <p>Leading sleep specialists discuss growing concerns regarding the dangers of insufficient
+                            sleep, why sleep disorders are underdiagnosed, and how to help patients get the sleep they
+                            need.</p>
+
+                    </div>
+                    <div class="yt-links">
+                        <a class="yt-links" href="https://youtu.be/G0Zj_InJ4BQ">Click here to watch video</a>
+                    </div>
+                </div>
+                <div class="yt-card">
+                    <div class="yt-img">
+                        <img class="ytt-image"
+                            src="https://img.medscapestatic.com/thumbnail_library/breast_cancer_s4_mtv_program_800x450.jpg"
+                            alt="">
+                    </div>
+                    <div class="yt-discription" style="height: 145px; overflow: hidden; font: -webkit-small-control;">
+                        <h5>Real Progress: Tailored Therapy in Early, High-Risk Breast Cancer</h5>
+                        <p>Dr Lisa Carey from the University of North Carolina discusses the integration of newer
+                            therapies for high-risk, early breast cancers into clinical therapy and strategies to
+                            personalize treatment.</p>
+
+                    </div>
+                    <div class="yt-links">
+                        <a class="yt-links" href="https://youtu.be/Rjje8xGzX88">Click here to watch video</a>
+                    </div>
+                </div>
+                <div class="yt-card">
+                    <div class="yt-img">
+                        <img class="ytt-image"
+                            src="https://img.medscapestatic.com/thumbnail_library/nhl_s3_mtv_ep_1_800x450.jpg" alt="">
+                    </div>
+                    <div class="yt-discription" style="height: 145px; overflow: hidden; font: -webkit-small-control;">
+                        <h5>An Unwelcome Return: Relapsed/Refractory Non-Hodgkin Lymphomas</h5>
+                        <p>Mayo Clinic oncologists discuss the importance of an accurate NHL diagnosis to inform
+                            therapy, which includes adding novel targeted agents to standard of care.</p>
+
+                    </div>
+                    <div class="yt-links">
+                        <a class="yt-links" href="https://youtu.be/UqyhHlDuQUQ">Click here to watch video</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <br>
+        <!--Footer-->
+        <div class="footer-clean" style="margin-top: 2cm;">
+            <footer>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-4 col-md-3 item">
+                            <h3>Services</h3>
+                            <ul>
+                                <li><a href="#">Web design</a></li>
+                                <li><a href="#">Development</a></li>
+                                <li><a href="#">Hosting</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 col-md-3 item">
+                            <h3>About</h3>
+                            <ul>
+                                <li><a href="#">Company</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Legacy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 col-md-3 item">
+                            <h3>Careers</h3>
+                            <ul>
+                                <li><a href="#">Job openings</a></li>
+                                <li><a href="#">Employee success</a></li>
+                                <li><a href="#">Benefits</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
+                                href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+                                    class="icon ion-social-snapchat"></i></a><a href="#"><i
+                                    class="icon ion-social-instagram"></i></a>
+                            <p class="copyright">JP Care © 2022</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                $('#logoutBtn').hide()
+                $('#usrBtn').hide()
+            });
+            $(".register").on('click', function (e) {
+                e.preventDefault();
+
+                var register_form = $('#registerform')[0];
+                var registerdata = new FormData(register_form);
+                console.log(register_form)
+                console.log(registerdata)
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{url_for( 'fill_form') }}",
+                    data: registerdata,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 800000,
+                    success: function (res) {
+
+                        if (res == 1) {
+                            $("#SignupModal").modal("hide");
+                            alert("record inserted");
+                        }
+                        else {
+                            $("#SignupModal").modal("hide");
+                            alert("record are not inserted");
+                        }
+                    },
+                    error: function (e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
+
+
+            });
+
+            $("#logoutBtn").on('click', function (e) {
+                $('#logoutBtn').hide()
+                $('#loginBtn').show()
+                $('#signupBtn').show()
+                $('#usrBtn').hide()
+            });
+            $(".login").on('click', function (e) {
+                e.preventDefault();
+
+                var login_form = $('#loginform')[0];
+                var logindata = new FormData(login_form);
+                console.log(login_form)
+                console.log(logindata)
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{url_for( 'login_form') }}",
+                    data: logindata,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 800000,
+                    success: function (log) {
+
+                        if (log != "Not found") {
+                            $("#LoginModal").modal("hide");
+                            $('#logoutBtn').show()
+                            $('#loginBtn').hide()
+                            $('#signupBtn').hide()
+                            $('#usrBtn').text(log)
+                            $('#usrBtn').show()
+                            alert("Welcome to Health Care System!");
+                        }
+                        else {
+                            $("#LoginModal").modal("hide");
+                            alert("No such account exist");
+                        }
+                    },
+                    error: function (e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
+
+
+            });
+        </script>
+
+
+</body>
+
+</html>

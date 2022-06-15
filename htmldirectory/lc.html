@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Jp care</title>
+    <link rel="stylesheet" href="css/sheet.css">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <style>
+        .symptoms {
+            width: 400px;
+            height: 550px;
+            border-radius: 34px;
+            background: #e0e0e0;
+            box-shadow: 35px 35px 70px #bebebe,
+                -35px 25px 70px #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ayurveda {
+            width: 900px;
+            height: 550px;
+            border-radius: 34px;
+            background: #e0e0e0;
+            box-shadow: 35px 35px 70px #bebebe,
+                -35px 25px 70px #ffffff;
+
+            padding: 10px 10px 10px 10px;
+        }
+
+        .form-group {
+            margin-bottom: 0px;
+        }
+
+        .card-body {
+            padding: 0px 0px 0px 0px;
+        }
+
+        .modal-footer {
+            padding: 0px 0px 0px 0px;
+        }
+
+        /* From cssbuttons.io by @westitan */
+        button {
+            position: relative;
+            padding: 19px 36px;
+            display: block;
+            text-decoration: none;
+
+            overflow: hidden;
+            border-radius: 40px;
+            border: none;
+        }
+
+        button span {
+            position: relative;
+            color: #fff;
+            font-family: Arial;
+            letter-spacing: 8px;
+            z-index: 1;
+        }
+
+        button .liquid {
+            position: absolute;
+            top: -80px;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: #e61628;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, .5);
+            transition: .5s;
+        }
+
+        button .liquid::after,
+        button .liquid::before {
+            content: '';
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            background: #fff;
+        }
+
+        button .liquid::before {
+            border-radius: 45%;
+            background: rgba(20, 20, 20, 1);
+            animation: animate 5s linear infinite;
+        }
+
+        button .liquid::after {
+            border-radius: 40%;
+            background: rgba(20, 20, 20, .5);
+            animation: animate 10s linear infinite;
+        }
+
+        button:hover .liquid {
+            top: -120px;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translate(-50%, -75%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -75%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg top-fixed" style="background: #22d322;">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#">iCode</a> -->
+            <img src="icon/icons8-medical-64 (1).png" alt="no img" height="40px">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    style="padding: 0px 0px 0px 20px;">
+                    <li><a href="/" class="nav-link px-2 text-black fw-bold fs-5">Home</a></li>
+                    <!-- <li><a href="#" class="nav-link px-2 text-black">Disease</a></li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold fs-5" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                            Disease
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item " href="diabetes">Diabeties</a></li>
+                            <li><a class="dropdown-item" href="lung_cancer">Lung Cancer</a></li>
+                            <li><a class="dropdown-item" href="kidney">Kidney Disease</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="consultency" class="nav-link px-2 text-black fw-bold fs-5">Consultency</a></li>
+                    <li><a href="about" class="nav-link px-2 text-black fw-bold fs-5">About Us</a></li>
+                    <li><a href="contact" class="nav-link px-2 text-black fw-bold fs-5">Contact Us</a></li>
+                </ul>
+
+                <!-- <div class="mx-4">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#LoginModal">Login</button>
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#">Sign
+                        Up</button>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <!--disease image-->
+    <img src="icon/lc1.jpg" alt="" style="width:-webkit-fill-available;">
+
+
+    <!--About this disease-->
+    <div class="container">
+        <div class="disease-name">
+            <br>
+            <h2>About this disease</h2>
+        </div>
+        <br>
+        <div class="di&d" style="display: flex;">
+            <img src="icon/lc3.jpg" alt="" style="height:250px; width:300px; border-radius: 23px;
+            
+            box-shadow:  -17px 17px 34px #aeb5ae,
+             17px -17px 34px #ffffff;">
+            <p style="padding-left: 1cm;">Lung cancer is a type of cancer that begins in the lungs. Your lungs are two
+                spongy organs in your chest that take in oxygen when you inhale and release carbon dioxide when you
+                exhale.
+
+                Lung cancer is the leading cause of cancer deaths worldwide.
+
+                People who smoke have the greatest risk of lung cancer, though lung cancer can also occur in people who
+                have never smoked. The risk of lung cancer increases with the length of time and number of cigarettes
+                you've smoked. If you quit smoking, even after smoking for many years, you can significantly reduce your
+                chances of developing lung cancer.
+            </p>
+        </div>
+    </div>
+    <br>
+    <!-- prediction -->
+    <div class="container5" style="margin:1cm 1cm 1cm 1cm;  ">
+        <div>
+            <h1>Wanna predict weather you have Lung Cancer or not?</h1>
+        </div>
+        <div style="display: flex; background:rgb(206, 211, 216); border-radius: 20px;">
+            <div class="image" style="width: 350px;">
+                <img src="icon/essay-on-doctors.webp" alt="" width="350px" style="border-radius: 20px;">
+            </div>
+            <div class="disc" style="display: flex; align-items: center;
+            flex-direction: column;
+            justify-content: center; padding-left: 1cm; background:rgb(206, 211, 216) ;">
+                <h2>Predict your Lung Cancer here</h2>
+                <p>By filling some simple requirred information you can come to know weather you have Lung Cancer or
+                    not.....Just click here</p>
+
+                <!-- Button trigger modal -->
+                <!-- <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#PredictModal">Predict</button> -->
+                <button data-bs-toggle="modal" data-bs-target="#PredictModal">
+                    <span>PREDICT</span>
+                    <div class="liquid"></div>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="PredictModal" tabindex="-1" aria-labelledby="PredictModal"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="PredictModal">Please enter the details regarding the disease
+                                </h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{{ url_for('lung_check')}}">
+
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-group row" style="margin-bottom: 0px">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Age</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter your age" name="userage">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Air
+                                                        Pollution</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter air pollution rate" name="userapoll">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Dust
+                                                        allergy</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter dust allergy rate" name="userdustall">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Occupational-hazards</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter occupational hazards"
+                                                            name="useroccuphaz">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Genetic
+                                                        Risk</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter genetic risk" name="usergr">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Obesity</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter Obesity" name="userob">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-12 col-sm-3 col-form-label text-sm-right">Smoking</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter smoking rate" name="usersmoke">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Passive
+                                                        smoker</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter passive smoker rate" name="userpsmoke">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Chest
+                                                        pain</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter the rate of chest pain"
+                                                            name="userchestp">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Blood
+                                                        Coughing</label>
+                                                    <div class="col-12 col-sm-8 col-lg-7">
+                                                        <input class="form-control" type="text" placeholder="Enter here"
+                                                            name="usercob">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <!-- <div align="center">
+                                            <button class="btn btn-danger btn-sm" type="submit"> Predict</button>
+                                        </div> -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Predict</button>
+                                        </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <br>
+
+    <!--Stats carsoul-->
+    <div class="container">
+        <h2>Statistics of disease</h2>
+        <br>
+        <div id="carouselExampleCaptions" class=" carousel-dark carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/c1.jpg" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Lung Cancer all over India</h1>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/c2.avif" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Lung cancer to non-smokers</h1>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div style="display: flex;">
+                        <div>
+                            <img src="icon/c3.jpg" alt="..." style="width: 700px; height:350px;">
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="margin-left: 1cm;">Risk factors of Lung Cancer</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <br>
+
+    <!--symptoms and ayurvedic-->
+    <div class="c" style="display: flex; justify-content: space-around; margin-top: 1cm;">
+        <div class="container1" style="width: 400px; height: 600px;  display: flex;
+        flex-direction: column;
+        align-items: center;">
+            <div>
+                <h2>Lung Cancer Symptoms</h2>
+            </div>
+            <div>
+                <div class="symptoms">
+                    <ul>
+                        <li>A new cough that doesn't go away</li>
+                        <li>Coughing up blood, even a small amount</li>
+                        <li>Shortness of breath</li>
+                        <li>Chest pain</li>
+                        <li>Hoarseness</li>
+                        <li>Losing weight without trying</li>
+                        <li>Bone pain</li>
+                        <li>Headache</li>
+                        <li>Trouble swallowing</li>
+                        <li>Swelling in the face and/or veins in the neck</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container1" style="width: 900px; height: 600px;  display: flex;
+        flex-direction: column;
+        align-items: center; ">
+            <div>
+                <h2>Ayurveda For Lung Cancer: air pollution-related disorders</h2>
+            </div>
+            <div>
+                <div class="ayurveda">
+
+                    <p>Inhalation of toxic pollutants leads to an imbalance in the three fundamental energies or
+                        principles which govern the function of our bodies. This causes numerous respiratory disorders
+                        and can also affect heart health so these treatments can help reverse the effects of air
+                        pollution:</p>
+                    <p style="font-size: small;"> <b>Nasya Karma:</b>This therapy includes the installation of medicated
+                        drops through the nostrils which prevents allergies caused by air pollutants. It should be done
+                        daily under the supervision and must be taken in small doses during bedtime and post waking up
+                        in the morning. This helps in flushing out pollutants from the nasal cavity and prevents the
+                        pollutants from crossing the nasal pathway. Instilling drops of almond oil or cow’s ghee can
+                        also help.</p>
+                    <p style="font-size: small;"> <b>Gandusha Karma/Oil pulling:</b>Healthy humans may breathe through
+                        their nose, their mouth or both. The nose has a filtering mechanism in preventing pollutants
+                        from entering the body. But for the mouth breathers, oil pulling therapy provides the barrier to
+                        prevent the entry of pollutants through the mouth. The process involves placing medicated oil
+                        into the mouth for 10-15 minutes and then spitting it out. It cleans the harmful bacteria and
+                        strengthens the mucous lining of the mouth to fight various allergens present in the air. </p>
+                    <p style="font-size: small;"> <b>Breathing exercises:</b> Breathing techniques like pranayama, kapal
+                        bhati etc. can be of significant help in cleansing the airway and combating the ill effects of
+                        pollution.</p>
+                    <p style="font-size: small;"> <b>Abhayanga/Massage: </b> It helps in improving blood circulation and
+                        getting rid of toxins that have entered the bloodstream by various means like inhalation or
+                        skin. Regular Abhyanga with sesame oil or other medicated oils infused with herbs increase the
+                        body’s immunity and helps keep the person energised.</p>
+                    <p style="font-size: small;"> <b>Swedana/Fomentation: </b> This is a procedure to induce sweating.
+                        The sweating caused by boiling medicinal herbs helps to liquefy and melt the adherent doshas
+                        (toxins) and expel them in an efficient manner, thus removing pollutants from our body. Facial
+                        steam can also be taken by adding eucalyptus oil, basil oil, tea tree oil, and carom seeds to
+                        cleanse and strengthen the nasal barrier for pollutants.</p>
+                    <p style="font-size: small;"> <b>Dhawana: </b> Washing the skin and bathing with medicated water
+                        helps in flushing out the pollutants stuck to the skin and mucous membrane.</p>
+                    <p style="font-size: small;"> <b>Diet and herbs:</b>One must consume freshly prepared warm food.
+                        Ingredients like ginger and carom seeds can be included in the diet. Tulsi, Pippali, Triphala
+                        etc, can be consumed on a regular basis to strengthen the respiratory and immune system.</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <BR></BR>
+
+    <!-- News Section -->
+    <div class="container" style="display: flex;  margin-top: 30px;">
+        <div>
+            <div class="news">
+
+                {% for key, segment in latest_news.items() %}
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?medical" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b>{{key}}</b>
+                        <p>{{segment}}</p>
+                    </div>
+                </section>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="side-text">
+            <h1 style="text-align: center;">Refer some news here</h1>
+        </div>
+    </div>
+
+    <br>
+    <!-- Treatment Section -->
+    <div class="container" style="display: flex;  margin-top: 30px;">
+        <div class="side-text">
+            <h1 style="text-align: center;">Refer some treatment news here</h1>
+        </div>
+
+        <div>
+            <div class="news">
+                {% for key, segment in treat_news.items() %}
+                <section class="section section-1">
+                    <img class="treatment-image" src="https://source.unsplash.com/230x230/?treatment" alt="">
+                    <div class="treatment-text" style="display: flex; justify-content: center; flex-direction: column;">
+                        <b>{{key}}</b>
+                        <p>{{segment}}</p>
+                    </div>
+                </section>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+
+    <!--Footer-->
+    <div class="footer-clean" style="margin-top: 2cm;">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
+                            href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+                                class="icon ion-social-snapchat"></i></a><a href="#"><i
+                                class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">JP Care © 2022</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
